@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y hhvm
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
 RUN sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf
 ADD default.conf /etc/nginx/sites-available/default
-RUN mkdir /log/nginx
+RUN mkdir /log && mkdir /log/nginx
 
 RUN mkdir /etc/service/nginx
 ADD nginx.sh /etc/service/nginx/run
