@@ -13,9 +13,6 @@ RUN \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   chown -R www-data:www-data /var/lib/nginx
 
-# nginx site conf
-ADD ./nginx-site.conf /etc/nginx/sites-available/default
-
 # Install PHP5
 RUN apt-get -y install php5-mysql php5-curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-sqlite php5-tidy php5-xmlrpc php5-xsl
 
@@ -51,6 +48,5 @@ VOLUME ["/data/src/wp-content", "/log"]
 
 # private expose
 EXPOSE 80
-EXPOSE 443
 
 CMD ["/sbin/my_init"]
