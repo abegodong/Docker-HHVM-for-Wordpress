@@ -1,6 +1,8 @@
 FROM phusion/baseimage:0.9.16
 MAINTAINER Abegodong <a@rc.lc>
 
+VOLUME ["/data/src/html/wp-content", "/log"]
+
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get -y install curl unzip git wget
 
@@ -44,9 +46,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ADD http://wordpress.org/latest.tar.gz /data/src/latest.tar.gz
 RUN cd /data/src && tar xvf latest.tar.gz && rm -f latest.tar.gz
 RUN mv /data/src/wordpress /data/src/html && rm -rf /data/src/wordpress
+ADD wp-config.php /data/src/html/wp-config.php
 RUN chown -R www-data:www-data /data/src/html
-
-VOLUME ["/data/src/wp-content", "/log"]
 
 # private expose
 EXPOSE 80
